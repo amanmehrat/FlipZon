@@ -1,11 +1,18 @@
 {
   "name": "flipzon",
+  "type": "module",
   "version": "1.0.0",
   "description": "ecommerce replica",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+    "start": "nodemon --watch backend --exec node --experimental-modules backend/server.js"
+    },
   "author": "uday",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
+  }
 }
