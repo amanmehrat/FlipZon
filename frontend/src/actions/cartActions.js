@@ -1,5 +1,5 @@
 import Axios from "axios";
-import { CART_ADD_ITEM } from "../constants/cartConstants";
+import { CART_ADD_ITEM, CART_REMOVE_ITEM } from "../constants/cartConstants";
 
 export const addToCart = (productId, qty) => async (dispatch, getState) => {
   // functions in thunk to dispatch an action and access the redux store
@@ -23,4 +23,12 @@ export const addToCart = (productId, qty) => async (dispatch, getState) => {
   } catch (error) {
     console.log(error + "sfsafaf");
   }
+};
+
+export const removeFromCart = (productId) => (dispatch, getState) => {
+  dispatch({
+    type: CART_REMOVE_ITEM,
+    payload: productId,
+  });
+  localStorage.setItem("cartItems", JSON.stringify(getState().cart.cartItems));
 };
