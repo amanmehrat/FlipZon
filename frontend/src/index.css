@@ -133,6 +133,10 @@ button.block {
   flex: 2 1 50rem; /* occupy 1 of 4 , make it shrinkable , set width of col */
 }
 
+.min-30 {
+  min-width: 30rem;
+}
+
 /* header */
 
 header a {
@@ -158,6 +162,11 @@ a.brand {
 /* image */
 img {
   border-radius: 0.5rem;
+}
+
+img.small {
+  max-width: 5rem;
+  width: 100%;
 }
 
 img.medium {
