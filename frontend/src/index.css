@@ -235,3 +235,22 @@ img.large {
   color: #a02020;
   background-color: #ffe0e0e0;
 }
+
+/* Form */
+
+.form {
+  max-width: 60rem;
+  margin: 0 auto; /* to center align */
+}
+
+.form > div {
+  /* direct div of form */
+  display: flex;
+  flex-direction: column; /* as label at top and input box at bottom */
+  margin: 1rem;
+}
+
+.form label {
+  margin: 1rem 0;
+  display: block;
+}
