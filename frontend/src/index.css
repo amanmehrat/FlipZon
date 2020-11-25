@@ -102,6 +102,10 @@ button:hover {
   border: 0.1rem #404040 solid;
 }
 
+input[type="radio"] {
+  margin: 1rem;
+}
+
 button.primary {
   background-color: #f0c040;
 }
@@ -255,7 +259,6 @@ img.large {
 
 .form label {
   margin: 1rem 0;
-  display: block;
 }
 
 /* Dropdown */
