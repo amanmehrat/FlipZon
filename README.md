@@ -4,6 +4,12 @@ This is a fully functional online shopping website with all essential components
 
 Simply download the code and run npm install for all dependencies to be installed. 
 
+In the root folder in command window type " npm start " to start the backend server
+
+Now in another window type cd frontend to enter the frontend folder. Again type " npm start " to start the REact server which will open the website. 
+
+Register yourself to the site and start shopping! (Not For real though)
+
 Make sure to add a .env file in root folder and add the variables like JWT encoding secret and paypal client ID. THESE SHOULD NOT BE COMMITTED hence hidden.
 
 
