@@ -14,3 +14,24 @@ export const generateToken = (user) => {
     }
   );
 };
+
+export const isAuth = (req, res, next) => {
+  const authorization = req.headers.authorization;
+  if (authorization) {
+    const token = authorization.slice(7, authorization.length); // As format is Bearer XXXX where XX is token. Hence 7 removes the first 7 characters(BEARER )
+    jwt.verify(
+      token,
+      process.env.JWT_SECRET || "somethingNotShared",
+      (err, decode) => {
+        if (err) {
+          res.status(401).send({ message: "Invalid Token" });
+        } else {
+          req.user = decode; // decode contains data as defined in jwt.sign
+          next(); // req with user property is passed to next middlewear
+        }
+      }
+    );
+  } else {
+    res.status(401).send({ message: "Invalid Token" });
+  }
+};
