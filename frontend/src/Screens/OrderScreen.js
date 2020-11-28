@@ -4,14 +4,21 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { viewOrder } from "../actions/orderActions";
+import { payOrder, viewOrder } from "../actions/orderActions";
 import Axios from "axios";
+import { ORDER_PAY_RESET } from "../constants/orderConstants";
 
 export default function OrderScreen(props) {
   const orderId = props.match.params.id;
   const [sdkReady, setSdkReady] = useState(false);
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
+  const orderPay = useSelector((state) => state.orderDetails);
+  const {
+    loading: loadingPay,
+    error: errorPay,
+    success: successPay,
+  } = orderPay;
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -28,7 +35,8 @@ export default function OrderScreen(props) {
       document.body.appendChild(script);
     };
     console.log("aaaaaaaaaaaaaaaaa" + order + orderId);
-    if (!order || !order._id) {
+    if (!order || !order._id || successPay || order._id !== orderId) {
+      dispatch({ type: ORDER_PAY_RESET }); // Payment was refreshing if this was not added. Debug properly once paypal sandbox working
       dispatch(viewOrder(orderId));
     } else {
       if (!order.isPaid) {
@@ -39,10 +47,10 @@ export default function OrderScreen(props) {
         }
       }
     }
-  }, [dispatch, order, orderId, sdkReady]); // order._id not used as order may be null and dont want errors
+  }, [dispatch, order, orderId, sdkReady, successPay]); // order._id not used as order may be null and dont want errors
 
-  const successPaymentHandler = () => {
-    // TODO dispatch pay order
+  const successPaymentHandler = (paymentResult) => {
+    dispatch(payOrder(order, paymentResult));
   };
 
   return loading ? (
@@ -162,11 +170,17 @@ export default function OrderScreen(props) {
                   {!sdkReady ? (
                     <LoadingBox></LoadingBox>
                   ) : (
-                    <PayPalButton
-                      amount={order.totalPrice}
-                      currency="INR"
-                      onSuccess={successPaymentHandler}
-                    ></PayPalButton>
+                    <>
+                      {errorPay && (
+                        <MessageBox variant="danger">{errorPay}</MessageBox>
+                      )}
+                      {loadingPay && <LoadingBox />}
+                      <PayPalButton
+                        amount={order.totalPrice}
+                        currency="INR"
+                        onSuccess={successPaymentHandler}
+                      ></PayPalButton>
+                    </>
                   )}
                 </li>
               )}
