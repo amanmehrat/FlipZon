@@ -81,6 +81,7 @@ export const payOrder = (order, paymentResult) => async (
     userSignin: { userInfo },
   } = getState();
   try {
+    console.log("Inside put axios" + userInfo.token);
     const { data } = Axios.put(`/api/orders/${order._id}/pay`, paymentResult, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });

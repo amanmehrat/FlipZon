@@ -13,7 +13,7 @@ export default function OrderScreen(props) {
   const [sdkReady, setSdkReady] = useState(false);
   const orderDetails = useSelector((state) => state.orderDetails);
   const { order, loading, error } = orderDetails;
-  const orderPay = useSelector((state) => state.orderDetails);
+  const orderPay = useSelector((state) => state.orderPay);
   const {
     loading: loadingPay,
     error: errorPay,
@@ -22,8 +22,8 @@ export default function OrderScreen(props) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    console.log("useeffectcalled");
     const addPayPalScript = async () => {
-      console.log("inside paypal function");
       const { data } = await Axios.get("/api/config/paypal");
       const script = document.createElement("script");
       script.type = "text/javascript";
@@ -34,22 +34,36 @@ export default function OrderScreen(props) {
       };
       document.body.appendChild(script);
     };
-    console.log("aaaaaaaaaaaaaaaaa" + order + orderId);
+
     if (!order || !order._id || successPay || order._id !== orderId) {
-      dispatch({ type: ORDER_PAY_RESET }); // Payment was refreshing if this was not added. Debug properly once paypal sandbox working
+      dispatch({ type: ORDER_PAY_RESET }); // Payment was refreshing if this was not added. Debug properly once paypal sandbox working. Reason is as successpay is true,we always come in to call dispatch vieworder hence rerender infinite. by resetting order pay we set succespay back to false and sice we have order from previous render we go to else and no state change is seen hence no rerender
+      console.log(sdkReady, successPay, orderId);
       dispatch(viewOrder(orderId));
     } else {
       if (!order.isPaid) {
         if (!window.paypal) {
+          console.log("papalscript added");
           addPayPalScript();
         } else {
+          console.log("sdk set added" + sdkReady);
           setSdkReady(true);
         }
       }
     }
+    console.log("useeffecr close");
   }, [dispatch, order, orderId, sdkReady, successPay]); // order._id not used as order may be null and dont want errors
 
   const successPaymentHandler = (paymentResult) => {
+    dispatch(payOrder(order, paymentResult));
+  };
+
+  const successPaymentReplicate = () => {
+    const paymentResult = {
+      id: Date.now().toString(),
+      status: "Success",
+      update_time: new Date().toString(),
+      email_address: "RandomTestMail",
+    };
     dispatch(payOrder(order, paymentResult));
   };
 
@@ -182,6 +196,18 @@ export default function OrderScreen(props) {
                       ></PayPalButton>
                     </>
                   )}
+                </li>
+              )}
+              {!order.isPaid && (
+                <li>
+                  {" "}
+                  <button
+                    className="primary block"
+                    onClick={successPaymentReplicate}
+                  >
+                    Force Success
+                  </button>{" "}
+                  {/* Only for testing */}
                 </li>
               )}
             </ul>
