@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 
 import { BrowserRouter, Link, Route } from "react-router-dom";
 import { signout } from "./actions/userActions";
+import PrivateRoute from "./components/PrivateRoute";
 import CartScreen from "./Screens/CartScreen";
 
 import HomeScreen from "./Screens/HomeScreen";
@@ -11,6 +12,7 @@ import OrderScreen from "./Screens/OrderScreen";
 import PaymentOptionScreen from "./Screens/PaymentOptionScreen";
 import PlaceOrderScreen from "./Screens/PlaceOrderScreen";
 import ProductScreen from "./Screens/ProductScreen";
+import ProfileScreen from "./Screens/ProfileScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
 import ShippingAddressScreen from "./Screens/ShippingAddressScreen";
 import SigninScreen from "./Screens/SigninScreen";
@@ -47,6 +49,9 @@ function App() {
                 </Link>
                 <ul className="dropdown-content">
                   <li>
+                    <Link to="/profile">Your Profile</Link>
+                  </li>
+                  <li>
                     <Link to="/orderHistory">Order History</Link>
                   </li>
                   <li>
@@ -71,7 +76,11 @@ function App() {
           <Route path="/payment" component={PaymentOptionScreen}></Route>
           <Route path="/placeOrder" component={PlaceOrderScreen}></Route>
           <Route path="/order/:id" component={OrderScreen}></Route>
-          <Route payh="/orderHistory" component={OrderHistoryScreen}></Route>
+          <Route path="/orderHistory" component={OrderHistoryScreen}></Route>
+          <PrivateRoute
+            path="/profile"
+            component={ProfileScreen}
+          ></PrivateRoute>
           <Route path="/cart/:id?" component={CartScreen}></Route>
         </main>
 
