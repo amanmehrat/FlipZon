@@ -64,6 +64,12 @@ export default function ProductScreen(props) {
                   </li>
                   <li>
                     <div className="row">
+                      <div>Colour</div>
+                      <div className="price">{product.color}</div>
+                    </div>
+                  </li>
+                  <li>
+                    <div className="row">
                       <div>Status</div>
                       <div>
                         {product.countInStock > 0 ? (

@@ -19,6 +19,10 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    color: {
+      type: String,
+      default: "red",
+    },
     description: {
       type: String,
       required: true,

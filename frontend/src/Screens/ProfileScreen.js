@@ -23,6 +23,7 @@ export default function ProfileScreen() {
   } = userUpdateProfile;
   const dispatch = useDispatch();
   useEffect(() => {
+    console.log(userInfo.token);
     if (!user) {
       dispatch({ type: USER_UPDATE_PROFILE_RESET }); // So that success message is removed and no state in this
       dispatch(getUserDetails(userInfo._id));

@@ -1,6 +1,9 @@
 import Axios from "axios";
 import { CART_EMPTY } from "../constants/cartConstants";
 import {
+  ORDER_CANCEL_FAIL,
+  ORDER_CANCEL_REQUEST,
+  ORDER_CANCEL_SUCCESS,
   ORDER_CREATE_FAIL,
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_SUCCESS,
@@ -84,7 +87,6 @@ export const payOrder = (order, paymentResult) => async (
     userSignin: { userInfo },
   } = getState();
   try {
-    console.log("Inside put axios" + userInfo.token);
     const { data } = Axios.put(`/api/orders/${order._id}/pay`, paymentResult, {
       headers: { Authorization: `Bearer ${userInfo.token}` },
     });
@@ -96,6 +98,35 @@ export const payOrder = (order, paymentResult) => async (
         : error.message;
     dispatch({
       type: ORDER_PAY_FAIL,
+      payload: message,
+    });
+  }
+};
+
+export const cancelOrder = (order) => async (dispatch, getState) => {
+  dispatch({
+    type: ORDER_CANCEL_REQUEST,
+    payload: { order },
+  });
+  const {
+    userSignin: { userInfo },
+  } = getState();
+  try {
+    const { data } = Axios.put(
+      `/api/orders/${order._id}/cancel`,
+      {},
+      {
+        headers: { Authorization: `Bearer ${userInfo.token}` },
+      }
+    );
+    dispatch({ type: ORDER_CANCEL_SUCCESS, payload: data });
+  } catch (error) {
+    const message =
+      error.response && error.response.data.message
+        ? error.response.data.message
+        : error.message;
+    dispatch({
+      type: ORDER_CANCEL_FAIL,
       payload: message,
     });
   }

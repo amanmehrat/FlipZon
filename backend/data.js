@@ -26,6 +26,7 @@ const data = {
       rating: 4.0,
       numReviews: 10,
       description: "Good quality shirt",
+      color: "green",
     },
     {
       name: "Y brand Fit Shirt",
@@ -37,6 +38,7 @@ const data = {
       rating: 4.0,
       numReviews: 8,
       description: "Good quality shirt",
+      color: "red",
     },
     {
       name: "Lacoste Shirt",
@@ -48,6 +50,7 @@ const data = {
       rating: 4.5,
       numReviews: 17,
       description: "Good quality shirt",
+      color: "orange",
     },
     {
       name: "X brand Slim pant",
@@ -59,6 +62,7 @@ const data = {
       rating: 4.0,
       numReviews: 10,
       description: "Good quality pant",
+      color: "red",
     },
     {
       name: "adidas Slim pant",
@@ -70,6 +74,7 @@ const data = {
       rating: 5.0,
       numReviews: 5,
       description: "Good quality pant",
+      color: "pink",
     },
     {
       name: "Y Brand Slim pant",
@@ -81,6 +86,7 @@ const data = {
       rating: 2.0,
       numReviews: 1,
       description: "Good quality shirt",
+      color: "yellow",
     },
   ],
 };

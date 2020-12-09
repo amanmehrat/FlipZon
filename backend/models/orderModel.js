@@ -20,6 +20,10 @@ const orderSchema = new mongoose.Schema(
           type: Number,
           required: true,
         },
+        color: {
+          type: String,
+          required: true,
+        },
         product: {
           type: mongoose.Schema.Types.ObjectId,
           ref: "Product",
@@ -71,6 +75,10 @@ const orderSchema = new mongoose.Schema(
     paidOn: { type: Date },
     isDelivered: { type: Boolean, default: false },
     deliverdOn: {
+      type: Date,
+    },
+    isCancelled: { type: Boolean, default: false },
+    cancelledOn: {
       type: Date,
     },
   },

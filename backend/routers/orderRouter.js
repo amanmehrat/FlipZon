@@ -2,6 +2,7 @@ import express from "express";
 import expressAsyncHandler from "express-async-handler";
 import Order from "../models/orderModel.js";
 import { isAuth } from "../utils.js";
+import { cancelOrder } from "../controllers/orderController.js";
 
 const orderRouter = express.Router();
 
@@ -76,5 +77,7 @@ orderRouter.put(
     }
   })
 );
+
+orderRouter.put("/:id/cancel", isAuth, cancelOrder);
 
 export default orderRouter;

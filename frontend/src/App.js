@@ -16,6 +16,7 @@ import ProfileScreen from "./Screens/ProfileScreen";
 import RegisterScreen from "./Screens/RegisterScreen";
 import ShippingAddressScreen from "./Screens/ShippingAddressScreen";
 import SigninScreen from "./Screens/SigninScreen";
+import ChatScreen from "./Screens/ChatScreen";
 
 function App() {
   const cart = useSelector((state) => state.cart);
@@ -41,26 +42,31 @@ function App() {
               <span className="badge">{cartItems.length}</span>
             )}
             {userInfo ? (
-              <div className="dropdown">
-                <Link to="#">
-                  {userInfo.name + " "}
-                  <i className="fa fa-caret-down"></i>
-                  {"  "}
-                </Link>
-                <ul className="dropdown-content">
-                  <li>
-                    <Link to="/profile">Your Profile</Link>
-                  </li>
-                  <li>
-                    <Link to="/orderHistory">Order History</Link>
-                  </li>
-                  <li>
-                    <Link to="#signout" onClick={signoutHandler}>
-                      Sign Out
-                    </Link>
-                  </li>
-                </ul>
-              </div>
+              <>
+                <div className="dropdown">
+                  <Link to="#">
+                    {userInfo.name + " "}
+                    <i className="fa fa-caret-down"></i>
+                    {"  "}
+                  </Link>
+                  <ul className="dropdown-content">
+                    <li>
+                      <Link to="/profile">Your Profile</Link>
+                    </li>
+                    <li>
+                      <Link to="/orderHistory">Order History</Link>
+                    </li>
+                    <li>
+                      <Link to="/chatSupport">Support</Link>
+                    </li>
+                    <li>
+                      <Link to="#signout" onClick={signoutHandler}>
+                        Sign Out
+                      </Link>
+                    </li>
+                  </ul>
+                </div>
+              </>
             ) : (
               <Link to="/signin">Sign in</Link>
             )}
@@ -97,6 +103,7 @@ function App() {
           <Route path="/payment" component={PaymentOptionScreen}></Route>
           <Route path="/placeOrder" component={PlaceOrderScreen}></Route>
           <Route path="/order/:id" component={OrderScreen}></Route>
+          <Route path="/chatSupport" component={ChatScreen}></Route>
           <Route path="/orderHistory" component={OrderHistoryScreen}></Route>
           <PrivateRoute
             path="/profile"

@@ -21,6 +21,7 @@ export default function Product(props) {
           numReviews={product.numReviews}
         ></Rating>
         <div className="price">&#8377;{product.price}</div>
+        <div>{product.color ? product.color : "red"}</div>
       </div>
     </div>
   );

@@ -1,4 +1,7 @@
 import {
+  ORDER_CANCEL_FAIL,
+  ORDER_CANCEL_REQUEST,
+  ORDER_CANCEL_SUCCESS,
   ORDER_CREATE_FAIL,
   ORDER_CREATE_REQUEST,
   ORDER_CREATE_RESET,
@@ -72,6 +75,30 @@ export const orderPayReducer = (state = {}, action) => {
         success: true,
       };
     case ORDER_PAY_FAIL:
+      return {
+        loading: false,
+        error: action.payload,
+      };
+    case ORDER_PAY_RESET:
+      return {};
+
+    default:
+      return state;
+  }
+};
+
+export const orderCancelReducer = (state = {}, action) => {
+  switch (action.type) {
+    case ORDER_CANCEL_REQUEST:
+      return {
+        loading: true,
+      };
+    case ORDER_CANCEL_SUCCESS:
+      return {
+        loading: false,
+        success: true,
+      };
+    case ORDER_CANCEL_FAIL:
       return {
         loading: false,
         error: action.payload,

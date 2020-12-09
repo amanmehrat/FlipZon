@@ -11,6 +11,7 @@ const data = {
       rating: 4.0,
       numReviews: 10,
       description: "Good quality shirt",
+      color: "green",
     },
     {
       _id: "2",
@@ -23,6 +24,7 @@ const data = {
       rating: 4.0,
       numReviews: 8,
       description: "Good quality shirt",
+      color: "red",
     },
     {
       _id: "3",
@@ -35,6 +37,7 @@ const data = {
       rating: 4.5,
       numReviews: 17,
       description: "Good quality shirt",
+      color: "green",
     },
     {
       _id: "4",
@@ -47,6 +50,7 @@ const data = {
       rating: 4.0,
       numReviews: 10,
       description: "Good quality pant",
+      color: "pink",
     },
     {
       _id: "5",
@@ -59,6 +63,7 @@ const data = {
       rating: 5.0,
       numReviews: 5,
       description: "Good quality pant",
+      color: "orange",
     },
     {
       _id: "6",
@@ -71,6 +76,7 @@ const data = {
       rating: 2.0,
       numReviews: 1,
       description: "Good quality shirt",
+      color: "blue",
     },
   ],
 };

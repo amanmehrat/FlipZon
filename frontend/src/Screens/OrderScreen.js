@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import LoadingBox from "../components/LoadingBox";
 import MessageBox from "../components/MessageBox";
-import { payOrder, viewOrder } from "../actions/orderActions";
+import { cancelOrder, payOrder, viewOrder } from "../actions/orderActions";
 import Axios from "axios";
 import { ORDER_PAY_RESET } from "../constants/orderConstants";
 
@@ -67,6 +67,10 @@ export default function OrderScreen(props) {
     dispatch(payOrder(order, paymentResult));
   };
 
+  const cancelBooking = () => {
+    dispatch(cancelOrder(order));
+  };
+
   return loading ? (
     <LoadingBox></LoadingBox>
   ) : error ? (
@@ -94,6 +98,11 @@ export default function OrderScreen(props) {
                   </MessageBox>
                 ) : (
                   <MessageBox variant="danger">Not Delivered</MessageBox>
+                )}
+                {order.isCancelled && (
+                  <MessageBox variant="success">
+                    Cancelled on {order.cancelledOn}
+                  </MessageBox>
                 )}
               </div>
             </li>
@@ -133,6 +142,7 @@ export default function OrderScreen(props) {
                             {item.name}
                           </Link>
                         </div>
+                        <div>{item.color}</div>
                         <div>
                           {item.qty} x &#8377;{item.price} = &#8377;
                           {item.qty * item.price}
@@ -206,6 +216,15 @@ export default function OrderScreen(props) {
                     onClick={successPaymentReplicate}
                   >
                     Force Success
+                  </button>{" "}
+                  {/* Only for testing */}
+                </li>
+              )}
+              {!order.isCancelled && (
+                <li>
+                  {" "}
+                  <button className="primary block" onClick={cancelBooking}>
+                    Cancel Order
                   </button>{" "}
                   {/* Only for testing */}
                 </li>

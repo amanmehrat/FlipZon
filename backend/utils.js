@@ -17,8 +17,10 @@ export const generateToken = (user) => {
 
 export const isAuth = (req, res, next) => {
   const authorization = req.headers.authorization;
+  //console.log(JSON.stringify(req.headers));
   if (authorization) {
     const token = authorization.slice(7, authorization.length); // As format is Bearer XXXX where XX is token. Hence 7 removes the first 7 characters(BEARER )
+    //console.log("aaaa" + token);
     jwt.verify(
       token,
       process.env.JWT_SECRET || "somethingNotShared",

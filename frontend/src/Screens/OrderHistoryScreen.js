@@ -27,6 +27,7 @@ export default function OrderHistoryScreen(props) {
               <th>Amount</th>
               <th>Paid</th>
               <th>Delivered</th>
+              <th>Cancelled</th>
               <th>Actions</th>
             </tr>
           </thead>
@@ -40,6 +41,11 @@ export default function OrderHistoryScreen(props) {
                 <td>
                   {order.isDelivered
                     ? order.deliveredOn.substring(0, 10)
+                    : "NO"}
+                </td>
+                <td>
+                  {order.isCancelled
+                    ? order.cancelledOn.substring(0, 10)
                     : "NO"}
                 </td>
                 <td>
