@@ -5,8 +5,8 @@ import identity from "../OrderHandleBotProjectYM-5ddb69d09e6e.js";
 const projectId = identity.project_id;
 const configuration = {
   credentials: {
-    private_key: process.env.private_key,
-    client_email: process.env.client_email,
+    private_key: identity.private_key,
+    client_email: identity.client_email,
   },
 };
 
@@ -18,7 +18,7 @@ const sessionClient = new dialogflow.SessionsClient(configuration);
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
 
 async function talkToChatbot(message = "5fc375c4b387e50d14b09ace") {
-  console.log("message " + message);
+  console.log("message " + projectId);
   const botRequest = {
     session: sessionPath,
     queryInput: {
