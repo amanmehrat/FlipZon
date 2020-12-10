@@ -16,7 +16,7 @@ export const cancelOrder = async (req, res) => {
 export const cancelOrderBot = async (id) => {
   try {
     const oldOrder = await Order.findById(id);
-    console.log("oldddd" + oldOrder.createdAt);
+    //console.log("oldddd" + oldOrder.createdAt);
     if (oldOrder) {
       if (oldOrder.isCancelled) {
         return (
@@ -53,16 +53,16 @@ export const cancelOrderBot = async (id) => {
 export const getOrder = async (id) => {
   try {
     const order = await Order.findById(id);
-    console.log(id + order.createdAt);
+    // console.log(id + order.createdAt);
     if (order) {
       let responseText = "";
       if (order.isDelivered) {
-        console.log("orderCreated" + order.createdAt);
+        // console.log("orderCreated" + order.createdAt);
         responseText = `Your order was delivered on ${String(
           order.deliveredOn
         ).substring(0, 10)}`;
       } else if (order.isCancelled) {
-        console.log("cancelled" + order.createdAt);
+        // console.log("cancelled" + order.createdAt);
         responseText += `You Cancelled the order on ${String(
           order.cancelledOn
         ).substring(0, 10)}`;
@@ -85,7 +85,7 @@ export const getOrder = async (id) => {
             " .Please complete payment to avoid last minute hassles";
         }
       }
-      console.log(responseText);
+      // console.log(responseText);
       return responseText;
     } else {
       return "Please check the OrderId and try again.";
@@ -98,8 +98,8 @@ export const getOrder = async (id) => {
 export const changeColor = async (id, colour) => {
   try {
     const oldOrder = await Order.findById(id);
-    console.log(oldOrder.createdAt);
-    console.log(oldOrder.orderItems[0].color);
+    //console.log(oldOrder.createdAt);
+    // console.log(oldOrder.orderItems[0].color);
     if (oldOrder) {
       if (oldOrder.orderItems[0].color === colour) {
         return "Your first order item is already of " + colour + "colour";

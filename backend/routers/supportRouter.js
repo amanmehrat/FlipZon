@@ -19,9 +19,9 @@ supportRouter.post(
   "/register",
   isAuth,
   expressAsyncHandler(async (req, res) => {
-    console.log("calling runsample" + req.body.message);
+    //console.log("calling runsample" + req.body.message);
     const response = await talkToChatbot(req.body.message);
-    console.log(response["fulfillmentText"]);
+    //console.log(response["fulfillmentText"]);
     //console.log(response);
     switch (response["fulfillmentText"].trim()) {
       case "FetchStatus:1":
@@ -37,7 +37,7 @@ supportRouter.post(
       case "Fetching details for order": {
         //console.log("inside fetch");
         let resp = await getOrder(String(req.body.message).trim());
-        console.log(resp);
+        // console.log(resp);
         res.send({
           message: resp + "... Can I help you with anything else?",
         });
@@ -87,7 +87,7 @@ supportRouter.post(
             message: resp + "... Can I help you with anything else?",
           });
         } else {
-          console.log("twertetwet");
+          //console.log("twertetwet");
           res.send({
             message: response["fulfillmentText"],
           });
