@@ -5,8 +5,8 @@ import identity from "../OrderHandleBotProjectYM-5ddb69d09e6e.js";
 const projectId = identity.project_id;
 const configuration = {
   credentials: {
-    private_key: identity.private_key,
-    client_email: identity.client_email,
+    private_key: process.env.private_key,
+    client_email: process.env.client_email,
   },
 };
 
