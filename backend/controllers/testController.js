@@ -12,7 +12,6 @@ const configuration = {
 
 const sessionId = "987654";
 const languageCode = "en-US";
-console.log(configuration);
 const sessionClient = new dialogflow.SessionsClient(configuration);
 
 const sessionPath = sessionClient.sessionPath(projectId, sessionId);
